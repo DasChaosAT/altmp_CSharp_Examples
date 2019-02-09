@@ -2,6 +2,7 @@
 using System.Security;
 using AltV.Net;
 using AltV.Net.Elements.Entities;
+using AltV.Net.Elements.Factories;
 using AltV.Net.Events;
 
 namespace CSharp_Examples
@@ -53,22 +54,22 @@ namespace CSharp_Examples
 
         public IPlayerFactory GetPlayerFactory()
         {
-            throw new NotImplementedException();
+            return new PlayerFactory();
         }
 
         public IVehicleFactory GetVehicleFactory()
         {
-            throw new NotImplementedException();
+            return new VehicleFactory();
         }
 
         public IBlipFactory GetBlipFactory()
         {
-            throw new NotImplementedException();
+            return new BlipFactory();
         }
 
         public ICheckpointFactory GetCheckpointFactory()
         {
-            throw new NotImplementedException();
+            return new CheckpointFactory();
         }
 
         private void OnCheckpoint(ICheckpoint checkpoint, IEntity entity, bool state)
