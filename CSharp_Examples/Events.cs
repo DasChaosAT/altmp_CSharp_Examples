@@ -1,9 +1,6 @@
-﻿using System;
-using System.Security;
-using AltV.Net;
+﻿using AltV.Net;
 using AltV.Net.Elements.Entities;
 using AltV.Net.Elements.Factories;
-using AltV.Net.Events;
 
 namespace CSharp_Examples
 {
@@ -192,7 +189,7 @@ namespace CSharp_Examples
             Alt.Server.LogDebug(player.Name + " left vehicle (Driver: " + vehicle.Driver.Name + ") from seat " + seat + ".");
         }
 
-        void TriggerCustomEvents()
+        private void TriggerCustomEvents()
         {
             // All Custom Events are called the same way.
             Alt.Emit("customEvent01", "FooBar");
@@ -201,7 +198,7 @@ namespace CSharp_Examples
             Alt.Emit("customEvent04", "FooBar");
         }
 
-        void CustomEvent04(string str)
+        public void CustomEvent04(string str)
         {
             Alt.Server.LogDebug("customEvent04 triggered with following argument: " + str);
         }
