@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security;
 using AltV.Net;
 using AltV.Net.Elements.Entities;
 using AltV.Net.Events;
@@ -9,6 +10,7 @@ namespace CSharp_Examples
     {
         public void OnStart()
         {
+            // Event Definitions
             Alt.OnCheckpoint += OnCheckpoint;
             Alt.OnEntityRemove += OnEntityRemove;
             Alt.OnPlayerConnect += OnPlayerConnect;
@@ -18,6 +20,28 @@ namespace CSharp_Examples
             Alt.OnVehicleChangeSeat += OnVehicleChangeSeat;
             Alt.OnVehicleEnter += OnVehicleEnter;
             Alt.OnVehicleLeave += OnVehicleLeave;
+
+            // Custom Event Triggers can be found at the bottom
+            // Custom Event Type 01
+            Alt.On("customEvent01", args =>
+            {
+                Alt.Server.LogDebug("customEvent01 triggered with following arguments: " + args[0]);
+            });
+
+            // Custom Event Type 02 - Fixed Argument Type
+            Alt.On<string>("customEvent02", str =>
+            {
+                Alt.Server.LogDebug("customEvent01 triggered with following argument: " + str);
+            });
+
+            // Custom Event Type 03 - Delegate Type
+            Alt.On("customEvent03", delegate(string str)
+            {
+                Alt.Server.LogDebug("customEvent03 triggered with following argument: " + str);
+            });
+
+            // Custom Event Type 04 - Method Call
+            Alt.On<string>("customEvent04", CustomEvent04);
 
             Alt.Server.LogInfo("Resource \"CSharp_Examples\" has been started.");
         }
@@ -165,6 +189,20 @@ namespace CSharp_Examples
         private void OnVehicleLeave(IVehicle vehicle, IPlayer player, sbyte seat)
         {
             Alt.Server.LogDebug(player.Name + " left vehicle (Driver: " + vehicle.Driver.Name + ") from seat " + seat + ".");
+        }
+
+        void TriggerCustomEvents()
+        {
+            // All Custom Events are called the same way.
+            Alt.Emit("customEvent01", "FooBar");
+            Alt.Emit("customEvent02", "FooBar");
+            Alt.Emit("customEvent03", "FooBar");
+            Alt.Emit("customEvent04", "FooBar");
+        }
+
+        void CustomEvent04(string str)
+        {
+            Alt.Server.LogDebug("customEvent04 triggered with following argument: " + str);
         }
     }
 }
