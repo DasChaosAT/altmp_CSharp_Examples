@@ -9,15 +9,15 @@ namespace CSharp_Examples
     {
         public void OnStart()
         {
-            Alt.OnCheckpoint += Alt_OnCheckpoint;
-            Alt.OnEntityRemove += Alt_OnEntityRemove;
-            Alt.OnPlayerConnect += Alt_OnPlayerConnect;
-            Alt.OnPlayerDamage += Alt_OnPlayerDamage;
-            Alt.OnPlayerDead += Alt_OnPlayerDead;
-            Alt.OnPlayerDisconnect += Alt_OnPlayerDisconnect;
-            Alt.OnVehicleChangeSeat += Alt_OnVehicleChangeSeat;
-            Alt.OnVehicleEnter += Alt_OnVehicleEnter;
-            Alt.OnVehicleLeave += Alt_OnVehicleLeave;
+            Alt.OnCheckpoint += OnCheckpoint;
+            Alt.OnEntityRemove += OnEntityRemove;
+            Alt.OnPlayerConnect += OnPlayerConnect;
+            Alt.OnPlayerDamage += OnPlayerDamage;
+            Alt.OnPlayerDead += OnPlayerDead;
+            Alt.OnPlayerDisconnect += OnPlayerDisconnect;
+            Alt.OnVehicleChangeSeat += OnVehicleChangeSeat;
+            Alt.OnVehicleEnter += OnVehicleEnter;
+            Alt.OnVehicleLeave += OnVehicleLeave;
 
             Alt.Server.LogInfo("Resource \"CSharp_Examples\" has been started.");
         }
@@ -47,11 +47,8 @@ namespace CSharp_Examples
             throw new NotImplementedException();
         }
 
-        private void Alt_OnCheckpoint(ICheckpoint checkpoint, IEntity entity, bool state)
+        private void OnCheckpoint(ICheckpoint checkpoint, IEntity entity, bool state)
         {
-            if (!checkpoint.Exists || !entity.Exists)
-                return;
-
             if (state)
             {
                 //Executed if entity enters checkpoint
@@ -86,7 +83,7 @@ namespace CSharp_Examples
             }
         }
 
-        private void Alt_OnEntityRemove(IEntity entity)
+        private void OnEntityRemove(IEntity entity)
         {
             switch (entity.Type)
             {
@@ -109,19 +106,13 @@ namespace CSharp_Examples
         }
 
 
-        private void Alt_OnPlayerConnect(IPlayer player, string reason)
+        private void OnPlayerConnect(IPlayer player, string reason)
         {
-            if (!player.Exists)
-                return;
-
             Alt.Server.LogInfo(player.Name + "has joined the server. (" + reason + ")");
         }
 
-        private void Alt_OnPlayerDamage(IPlayer player, IEntity attacker, uint weapon, byte damage)
+        private void OnPlayerDamage(IPlayer player, IEntity attacker, uint weapon, byte damage)
         {
-            if (!player.Exists || !attacker.Exists)
-                return;
-
             switch (attacker.Type)
             {
                 case EntityType.Player:
@@ -138,11 +129,8 @@ namespace CSharp_Examples
             }
         }
 
-        private void Alt_OnPlayerDead(IPlayer player, IEntity killer, uint weapon)
+        private void OnPlayerDead(IPlayer player, IEntity killer, uint weapon)
         {
-            if (!player.Exists || !killer.Exists)
-                return;
-
             switch (killer.Type)
             {
                 case EntityType.Player:
@@ -159,35 +147,23 @@ namespace CSharp_Examples
             }
         }
 
-        private void Alt_OnPlayerDisconnect(IPlayer player, string reason)
+        private void OnPlayerDisconnect(IPlayer player, string reason)
         {
-            if (!player.Exists)
-                return;
-
             Alt.Server.LogInfo(player.Name + "has left the server. (" + reason + ")");
         }
 
-        private void Alt_OnVehicleChangeSeat(IVehicle vehicle, IPlayer player, sbyte oldSeat, sbyte newSeat)
+        private void OnVehicleChangeSeat(IVehicle vehicle, IPlayer player, sbyte oldSeat, sbyte newSeat)
         {
-            if (!vehicle.Exists || !player.Exists)
-                return;
-
             Alt.Server.LogDebug(player.Name + " has changed seat in vehicle (Driver: " + vehicle.Driver.Name + ") from " + oldSeat + " to " + newSeat + ".");
         }
         
-        private void Alt_OnVehicleEnter(IVehicle vehicle, IPlayer player, sbyte seat)
+        private void OnVehicleEnter(IVehicle vehicle, IPlayer player, sbyte seat)
         {
-            if (!vehicle.Exists || !player.Exists)
-                return;
-
             Alt.Server.LogDebug(player.Name + " entered vehicle (Driver: " + vehicle.Driver.Name + ") on seat " + seat +  ".");
         }
 
-        private void Alt_OnVehicleLeave(IVehicle vehicle, IPlayer player, sbyte seat)
+        private void OnVehicleLeave(IVehicle vehicle, IPlayer player, sbyte seat)
         {
-            if (!vehicle.Exists || !player.Exists)
-                return;
-
             Alt.Server.LogDebug(player.Name + " left vehicle (Driver: " + vehicle.Driver.Name + ") from seat " + seat + ".");
         }
     }
