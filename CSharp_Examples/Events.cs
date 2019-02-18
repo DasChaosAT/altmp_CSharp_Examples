@@ -130,14 +130,16 @@ namespace CSharp_Examples
             Alt.Log(player.Name + "has joined the server. (" + reason + ")");
         }
 
-        private void OnPlayerDamage(IPlayer player, IEntity attacker, uint weapon, byte damage)
+        private void OnPlayerDamage(IPlayer player, IEntity attacker, uint weapon, 
+            byte damage)
         {
             switch (attacker.Type)
             {
                 case EntityType.Player:
                     var playerAttacker = (IPlayer) attacker;
                     Alt.Log(player.Name + " has been damaged by " + playerAttacker.Name 
-                            + " with weapon " + weapon + " and suffered " + damage + " HP.");
+                            + " with weapon " + weapon + " and suffered " + damage +
+                            " HP.");
                     break;
                 case EntityType.Vehicle:
                     var vehicleAttacker = (IVehicle)attacker;
