@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AltV.Net" Version="1.0.1-dev-preview-1" />
-    <PackageReference Include="AltV.Net.Async" Version="1.0.1-dev-preview-1" />
-    <PackageReference Include="AltV.Net.Mock" Version="1.0.1-dev-preview-1" />
+    <PackageReference Include="AltV.Net" Version="1.0.1-dev-preview-2" />
+    <PackageReference Include="AltV.Net.Async" Version="1.0.1-dev-preview-2" />
+    <PackageReference Include="AltV.Net.Mock" Version="1.0.1-dev-preview-2" />
   </ItemGroup>
 
 </Project>
