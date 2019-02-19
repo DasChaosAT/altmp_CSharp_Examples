@@ -100,6 +100,7 @@ namespace CSharp_Examples
         private async Task OnEntityRemove(IEntity entity)
         {
             Position entityPosition = await entity.GetPositionAsync();
+
             switch (entity.Type)
             {
                 case EntityType.Player:
@@ -237,6 +238,7 @@ namespace CSharp_Examples
             AltAsync.Log(playerName + " left vehicle (Driver: " + driverName
                                 + ") from seat " + seat + ".");
         }
+
         public override void OnStop()
         {
             AltAsync.Log("Resource \"CSharp_Examples\" has been stopped.");
