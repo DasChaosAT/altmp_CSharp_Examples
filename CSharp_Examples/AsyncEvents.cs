@@ -6,7 +6,7 @@ using AltV.Net.Elements.Entities;
 
 namespace CSharp_Examples
 {
-    public class AsyncEvents : Resource
+    public class AsyncEvents : AsyncResource
     {
         public override void OnStart()
         {
